@@ -317,6 +317,12 @@ justify-content:center;
 align-items:center;
 }
 
+.intro-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .hidden{
 display:none;
 }
@@ -350,4 +356,10 @@ cursor:pointer;
   padding: 1em;
   border: 1px solid #e4ebfa;
   border-radius: 10px;
+}
+
+#close-modal{
+  width: fit-content;
+  border: none;
+  background-color: #fff;
 }
