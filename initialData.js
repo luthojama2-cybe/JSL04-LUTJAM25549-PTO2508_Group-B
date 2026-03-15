@@ -1,91 +1,93 @@
 const initialTasks = [
-  {
-    id: 1,
-    title: "Launch Epic Career 🚀",
-    description: "Create a killer Resume",
-    status: "todo",
-  },
-  {
-    id: 2,
-    title: "Master JavaScript 💛",
-    description: "Get comfortable with the fundamentals",
-    status: "doing",
-  },
-  {
-    id: 3,
-    title: "Keep on Going 🏆",
-    description: "You're almost there",
-    status: "doing",
-  },
+{
+id:1,
+title:"Launch Epic Career 🚀",
+description:"Create a killer Resume",
+status:"todo"
+},
 
-  {
-    id: 11,
-    title: "Learn Data Structures and Algorithms 📚",
-    description:
-      "Study fundamental data structures and algorithms to solve coding problems efficiently",
-    status: "todo",
-  },
-  {
-    id: 12,
-    title: "Contribute to Open Source Projects 🌐",
-    description:
-      "Gain practical experience and collaborate with others in the software development community",
-    status: "done",
-  },
-  {
-    id: 13,
-    title: "Build Portfolio Projects 🛠️",
-    description:
-      "Create a portfolio showcasing your skills and projects to potential employers",
-    status: "done",
-  },
+{
+id:2,
+title:"Master JavaScript 💛",
+description:"Get comfortable with the fundamentals",
+status:"doing"
+},
+
+{
+id:3,
+title:"Contribute to Open Source",
+description:"Gain practical experience",
+status:"done"
+}
 ];
 
-// 3 tasks loop
-for (let i = 0; i < 3; i++) {
+let currentTaskId = null;
 
-  let taskTitle = prompt(`Enter title for task ${i + 1}:`);
-  let taskDescription = prompt(`Enter description for task ${i + 1}:`);
-  let taskStatus = prompt(
-    "Enter task status (todo, doing, done):"
-  ).toLowerCase();
+function renderTasks(){
 
-  // Status error catching
-  while (
-    taskStatus !== "todo" &&
-    taskStatus !== "doing" &&
-    taskStatus !== "done"
-  ) {
-    alert("Invalid status. Please enter 'todo', 'doing', or 'done'.");
-    taskStatus = prompt(
-      "Enter task status (todo, doing, done):"
-    ).toLowerCase();
-  }
+document.getElementById("todo-column").innerHTML="";
+document.getElementById("doing-column").innerHTML="";
+document.getElementById("done-column").innerHTML="";
 
-  // Create new ID
-  const newId =
-    Math.max(...initialTasks.map(task => task.id)) + 1;
+initialTasks.forEach(task=>{
 
-  const newTask = {
-    id: newId,
-    title: taskTitle,
-    description: taskDescription,
-    status: taskStatus,
-  };
+const taskDiv=document.createElement("div");
 
-  initialTasks.push(newTask);
+taskDiv.classList.add("task-div");
+taskDiv.textContent=task.title;
+
+taskDiv.addEventListener("click",()=>{
+openModal(task.id);
+});
+
+if(task.status==="todo"){
+document.getElementById("todo-column").appendChild(taskDiv);
 }
-//Chck console message
-alert("There are enough tasks on your board, please check them in the console.");
 
-// Log full list
-console.log("Updated Task List:");
-console.log(initialTasks);
+if(task.status==="doing"){
+document.getElementById("doing-column").appendChild(taskDiv);
+}
 
-// Completed task log
-const completedTasks = initialTasks.filter(
-  task => task.status === "done"
-);
+if(task.status==="done"){
+document.getElementById("done-column").appendChild(taskDiv);
+}
 
-console.log("Completed Tasks:");
-console.log(completedTasks);
+});
+
+}
+
+function openModal(taskId){
+
+const task=initialTasks.find(t=>t.id===taskId);
+
+currentTaskId=taskId;
+
+document.getElementById("modal-title").value=task.title;
+document.getElementById("modal-description").value=task.description;
+document.getElementById("modal-status").value=task.status;
+
+document.getElementById("task-modal").classList.remove("hidden");
+
+}
+
+document.getElementById("close-modal").addEventListener("click",()=>{
+
+document.getElementById("task-modal").classList.add("hidden");
+
+});
+
+document.getElementById("save-task").addEventListener("click",()=>{
+
+const task=initialTasks.find(t=>t.id===currentTaskId);
+
+task.title=document.getElementById("modal-title").value;
+task.description=document.getElementById("modal-description").value;
+task.status=document.getElementById("modal-status").value;
+
+renderTasks();
+
+document.getElementById("task-modal").classList.add("hidden");
+
+});
+
+renderTasks();
