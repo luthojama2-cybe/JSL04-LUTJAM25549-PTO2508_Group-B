@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+ <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
 <nav class="side-bar">
   <div id="side-logo-div">
     <h2>Kanban</h2>
@@ -25,71 +25,59 @@
     <button class="board-btn">Launch Career</button>
   </div>
 </nav>
-
+ <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
 <div id="layout">
-
 <header>
 <h2>Launch Career</h2>
 </header>
-
+<!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
 <div class="container">
 
 <main class="card-column-main">
 
 <div class="column-div">
-
+<!-- Todo column -->
 <div class="column-head-div">
 <span class="dot" id="todo-dot"></span>
 <h4>TODO</h4>
 </div>
-
-<div class="tasks-container" id="todo-column"></div>
-
-</div>
-
+<!-- Tasks will be dynamically inserted through javascript -->
+<div class="tasks-container" id="todo-column"></div></div>
+<!-- Doing Column -->
 <div class="column-div">
-
 <div class="column-head-div">
 <span class="dot" id="doing-dot"></span>
 <h4>DOING</h4>
 </div>
-
+<!-- JS insert task here -->
 <div class="tasks-container" id="doing-column"></div>
-
 </div>
-
+<!-- Done Column -->
 <div class="column-div">
-
 <div class="column-head-div">
 <span class="dot" id="done-dot"></span>
 <h4>DONE</h4>
 </div>
-
 <div class="tasks-container" id="done-column"></div>
-
 </div>
-
 </main>
-
 </div>
-
 </div>
-
+<!-- Modal Section -->
 <div id="task-modal" class="modal hidden">
-
 <div class="modal-content">
-
   <div class="intro-header">
 <h3>Task</h3>
+<!-- Title and close button div -->
 <button id="close-modal"><i class="fa-solid fa-x fa-2xl" style="color: rgb(255, 50, 50);"></i></i></button>
 </div>
-
 <label>Title</label>
 <input id="modal-title" type="text">
-
+<!-- Editable task description -->
 <label>Description</label>
+<!-- Text area for task description -->
 <textarea id="modal-description"></textarea>
-
+<!-- Task status -->
 <label>Status</label>
 
 <select id="modal-status">
